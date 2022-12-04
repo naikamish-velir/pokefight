@@ -1,0 +1,132 @@
+[
+	{
+		"title": "Master League (Classic)",
+		"cup": "classic",
+		"cp": 10000,
+		"meta": "master",
+		"showCup": false,
+		"showFormat": true,
+		"showMeta": false,
+		"hideRankings": true
+	},
+	{
+		"title": "Master League (Megas)",
+		"cup": "mega",
+		"cp": 10000,
+		"meta": "mastermega",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": true
+	},
+	{
+		"title": "ML Overused",
+		"cup": "overused",
+		"cp": 10000,
+		"meta": "overused",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": true
+	},
+	{
+		"title": "Premier Classic (Ultra League)",
+		"cup": "premierclassic",
+		"cp": 2500,
+		"meta": "ultrapremierclassic",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": true
+	},
+	{
+		"title": "Premier Classic (Master League)",
+		"cup": "premierclassic",
+		"cp": 10000,
+		"meta": "masterpremierclassic",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": true
+	},
+	{
+		"title": "Great League Remix",
+		"cup": "remix",
+		"cp": 1500,
+		"meta": "remix",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Fighting Cup Remix",
+		"cup": "fightingremix",
+		"cp": 1500,
+		"meta": "fightingremix",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Silph Factions (Great League)",
+		"cup": "factionsgreat",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": false,
+		"showFormat": true,
+		"showMeta": false,
+		"hideRankings": true
+	},
+	{
+		"title": "Silph Factions (Ultra League)",
+		"cup": "factionsultra",
+		"cp": 2500,
+		"meta": "ultra",
+		"showCup": false,
+		"showFormat": true,
+		"showMeta": false,
+		"hideRankings": true
+	},
+	{
+		"title": "Silph Factions (Master League)",
+		"cup": "factionsmaster",
+		"cp": 10000,
+		"meta": "masterfactions",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Silph Factions (Ember)",
+		"cup": "ember",
+		"cp": 1500,
+		"meta": "ember",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Silph Factions (Vanguard)",
+		"cup": "vanguard",
+		"cp": 1500,
+		"meta": "vanguard",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "GO Stadium Cliffhanger",
+		"cup": "cliffhanger",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": false,
+		"showFormat": true,
+		"showMeta": false,
+		"hideRankings": true
+	},
+	{
+		"title": "Custom",
+		"cup": "custom",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": false
+	}
+]

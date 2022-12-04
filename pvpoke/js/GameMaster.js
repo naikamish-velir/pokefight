@@ -25,7 +25,7 @@ import { readFile } from 'fs';
 			var pokemon;
 
 			id = id.replace("_xl", "");
-
+			console.log("finding pokemon " + id)
 			object.data.pokemon.forEach((poke, index) => {
 
 				if(poke.speciesId == id){

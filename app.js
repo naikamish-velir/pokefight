@@ -42,6 +42,8 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
     Battle.setNewPokemon(mon2, 1, true);
     Battle.simulate();
     await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
+    
+    Battle.clearPokemon();
 
   });
 

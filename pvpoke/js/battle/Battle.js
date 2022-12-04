@@ -1055,6 +1055,7 @@ function Battle(){
 		let oppFastDamage = self.calculateDamage(opponent, poke, opponent.fastMove);
 		let hasNonDebuff = false;
 		let useChargedMove = false;
+		let action = null;
 
 		// If no Charged Moves at all, return
 		if(poke.activeChargedMoves.length < 1){
@@ -1221,7 +1222,7 @@ function Battle(){
 
 					self.logDecision(turns, poke, " uses " + poke.chargedMoves[maxDamageMoveIndex].name + " because it is has " + turnsToLive + " turn(s) before it is KO'd.");
 
-					let action = new TimelineAction(
+					action = new TimelineAction(
 						"charged",
 						poke.index,
 						turns,
@@ -1974,7 +1975,7 @@ function Battle(){
 		}
 
 
-		let action = new TimelineAction(
+		action = new TimelineAction(
 			"charged",
 			poke.index,
 			turns,
@@ -2045,7 +2046,6 @@ function Battle(){
 		actionOptions.push(new DecisionOption("FAST_MOVE", fastMoveWeight));
 
 		let actionType = self.chooseOption(actionOptions);
-		let action;
 
 		switch(actionType.name){
 			case "FAST_MOVE":

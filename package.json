@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@slack/bolt": "^3.12.2",
-    "dotenv": "^16.0.3",
-    "jquery": "^3.6.1"
+    "dotenv": "^16.0.3"
   }
 }

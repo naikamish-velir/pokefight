@@ -29,6 +29,7 @@ app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
+        await say(`:pokemon-${mon.speciesId}: is ready to fight!`);
     }
 });
 

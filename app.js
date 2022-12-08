@@ -43,6 +43,7 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
     Battle.setNewPokemon(mon2, 1, true);
     Battle.simulate();
     await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
+    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00`)
     
     Battle.clearPokemon();
 

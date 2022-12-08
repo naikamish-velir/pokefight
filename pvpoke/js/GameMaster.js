@@ -1,6 +1,4 @@
 // JavaScript Document
-import pkg from 'jquery';
-const { each, getJSON } = pkg;
 import { readFile } from 'fs';
 
     function createInstance() {

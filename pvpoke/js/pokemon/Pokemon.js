@@ -860,7 +860,41 @@ function Pokemon(data, i, b){
 	// Obtain a Pokemon's recommended moveset from the rankings and select them
 
 	this.selectRecommendedMoveset = function(category){
+		const key = "alloverall1500"
+		if(! GameMaster.rankings[key]){
+			console.log("Ranking data not loaded yet");
+			return;
+		}
+
+		var rankings = GameMaster.rankings[key];
+		var found = false;
+
+		for(var i = 0; i < rankings.length; i++){
+			var r = rankings[i];
+
+			if(r.speciesId == self.speciesId){
+				self.selectMove("fast", r.moveset[0]);
+				self.selectMove("charged", r.moveset[1], 0);
+
+				if(r.moveset.length > 2){
+					self.selectMove("charged", r.moveset[2], 1);
+				}
+
+				self.resetMoves();
+
+				// Assign overall score for reference
+				self.overall = r.score;
+				self.scores = r.scores;
+
+				found = true;
+				break;
+			}
+		}
+
+		// If no results, auto select moveset
+		if(! found){
 			self.autoSelectMoves();
+		}
 	}
 
 	// Given an opponent, generate move usage stats

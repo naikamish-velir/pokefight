@@ -3,6 +3,7 @@ import { readFile } from 'fs';
 
     function createInstance() {
         var object = new Object();
+		object.rankings = [];
 
 		object.data = {};
 		object.groups = [];
@@ -436,27 +437,16 @@ import { readFile } from 'fs';
 
 		// Load and return ranking data JSON
 
-		object.loadRankingData = function(caller, category, league, cup){
+		object.loadRankingData = function(category, league, cup){
 
 			var key = cup + "" + category + "" + league;
 
 			if(! object.rankings[key]){
-				var file = webRoot+"data/rankings/"+cup+"/"+category+"/"+"rankings-"+league+".json?v="+siteVersion;
-
-				console.log(file);
-
-				getJSON( file, function( data ){
-					object.rankings[key] = data;
+				readFile( "pvpoke/data/rankings/all/"+category+"/"+"rankings-"+league+".json", function( err, data ){
+					if (err) throw err;
+					object.rankings[key] = JSON.parse(data);
 					object.loadedData++;
-
-					if(caller.displayRankingData){
-						caller.displayRankingData(data);
-					}
 				});
-			} else{
-				if(caller.displayRankingData){
-					caller.displayRankingData(object.rankings[key]);
-				}
 			}
 		}
 

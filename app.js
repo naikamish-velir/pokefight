@@ -43,7 +43,12 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
     Battle.setNewPokemon(mon2, 1, true);
     Battle.simulate();
     await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
-    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00`)
+    
+    //TODO: make this code not terrible
+    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00/${Battle.getPokemon()[0].fastMovePool.indexOf(Battle.getPokemon()[0].fastMove)}-` +
+        (Battle.getPokemon()[0].chargedMovePool.indexOf(Battle.getPokemon()[0].chargedMoves[0]) + 1) + "-" + (Battle.getPokemon()[0].chargedMovePool.indexOf(Battle.getPokemon()[0].chargedMoves[1]) + 1) + "/" + 
+        Battle.getPokemon()[1].fastMovePool.indexOf(Battle.getPokemon()[1].fastMove) + "-" +
+        (Battle.getPokemon()[1].chargedMovePool.indexOf(Battle.getPokemon()[1].chargedMoves[0]) + 1) + "-" + (Battle.getPokemon()[1].chargedMovePool.indexOf(Battle.getPokemon()[1].chargedMoves[1]) + 1))
     
     Battle.clearPokemon();
 
@@ -53,6 +58,8 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 3000);
+  
+  GameMaster.loadRankingData( "overall", 1500, "all");
 
   console.log('⚡️ Bolt app is running!');
 })();

@@ -1945,24 +1945,6 @@ function Pokemon(data, i, b){
 		var chargedMove1Str = self.chargedMovePool.indexOf(self.chargedMoves[0])+1;
 		var chargedMove2Str = self.chargedMovePool.indexOf(self.chargedMoves[1])+1;
 
-		// Check for any custom moves;
-
-		if(self.fastMove.isCustom || settings.hardMovesetLinks){
-			fastMoveStr = self.fastMove.moveId;
-		}
-
-		if(self.chargedMoves.length > 0){
-			if(self.chargedMoves[0].isCustom || settings.hardMovesetLinks){
-				chargedMove1Str = self.chargedMoves[0].moveId;
-			}
-		}
-
-		if(self.chargedMoves.length > 1){
-			if(self.chargedMoves[1].isCustom || settings.hardMovesetLinks){
-				chargedMove2Str = self.chargedMoves[1].moveId;
-			}
-		}
-
 		moveStr = fastMoveStr + "-" + chargedMove1Str + "-" + chargedMove2Str;
 
 		return moveStr;

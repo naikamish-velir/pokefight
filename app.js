@@ -13,6 +13,7 @@ const app = new App({
     socketMode: true, // add this
     appToken: process.env.SLACK_APP_TOKEN // add this
 });
+//TODO: this regex is too greedy, it's matching the "X fight Y" command
 app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
     const mon = GameMaster.getPokemonById(context.matches[1]);
 
@@ -43,12 +44,8 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
     Battle.setNewPokemon(mon2, 1, true);
     Battle.simulate();
     await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
-    
-    //TODO: make this code not terrible
-    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00/${Battle.getPokemon()[0].fastMovePool.indexOf(Battle.getPokemon()[0].fastMove)}-` +
-        (Battle.getPokemon()[0].chargedMovePool.indexOf(Battle.getPokemon()[0].chargedMoves[0]) + 1) + "-" + (Battle.getPokemon()[0].chargedMovePool.indexOf(Battle.getPokemon()[0].chargedMoves[1]) + 1) + "/" + 
-        Battle.getPokemon()[1].fastMovePool.indexOf(Battle.getPokemon()[1].fastMove) + "-" +
-        (Battle.getPokemon()[1].chargedMovePool.indexOf(Battle.getPokemon()[1].chargedMoves[0]) + 1) + "-" + (Battle.getPokemon()[1].chargedMovePool.indexOf(Battle.getPokemon()[1].chargedMoves[1]) + 1))
+
+    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
     
     Battle.clearPokemon();
 

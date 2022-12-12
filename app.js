@@ -21,33 +21,56 @@ app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
     {
         Battle.setNewPokemon(mon, 1, true);
         
-        await say(`:pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${mon.speciesId}:`);
-        Battle.simulate();
-
-        await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
-
-        Battle.clearPokemon();
+        doFight(say);
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
         await say(`:pokemon-${mon.speciesId}: is ready to fight!`);
     }
 });
+app.message("pokefight go", async ({ message, say, context, client }) => {
+    var random = Math.floor(Math.random() * 151);
+    const mon = GameMaster.getPokemonByIndex(random);
+    const result = await client.users.info({
+        user: message.user,
+     });
+     const selectedUser = result.user.profile.display_name;
+
+    if(Battle.getPokemon()[0])
+    {
+        Battle.setNewPokemon(mon, 1, true);
+        
+        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+       doFight(say);
+    }
+    else{
+        Battle.setNewPokemon(mon, 0, true);
+        await say(`${selectedUser} wants to battle!`);
+        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+    }
+});
+
+ doFight = async function(say)
+{
+    await say(`:pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${mon.speciesId}:`);
+    Battle.simulate();
+
+    await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
+    await say (`full log can be found at https://pvpoke.com/battle/1500/${Battle.getPokemon()[0].speciesId}/${Battle.getPokemon()[1].speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
+    
+
+    Battle.clearPokemon();
+}
 
 app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) => {
     // say() sends a message to the channel where the event was triggered
     const mon1  = GameMaster.getPokemonById(context.matches[1]);
     const mon2 = GameMaster.getPokemonById(context.matches[2]);
 
-    await say(`:pokemon-${mon1.speciesId}: fights :pokemon-${mon2.speciesId}:`);
     Battle.setNewPokemon(mon1, 0, true);
     Battle.setNewPokemon(mon2, 1, true);
-    Battle.simulate();
-    await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
 
-    await say (`full log can be found at https://pvpoke.com/battle/1500/${mon1.speciesId}/${mon2.speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
-    
-    Battle.clearPokemon();
+    doFight(say);
 
   });
 

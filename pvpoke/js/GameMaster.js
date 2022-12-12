@@ -35,6 +35,21 @@ import { readFile } from 'fs';
 
 			return pokemon;
 		}
+		
+		object.getPokemonByIndex = function(dexNum){
+			var pokemon;
+
+			console.log("finding pokemon " + dexNum)
+			object.data.pokemon.some((poke, index) => {
+
+				if(poke.dex == dexNum){
+					pokemon = poke;
+					return true;
+				}
+			});
+
+			return pokemon;
+		}
 
 
 

@@ -14,7 +14,7 @@ const app = new App({
     appToken: process.env.SLACK_APP_TOKEN // add this
 });
 //TODO: this regex is too greedy, it's matching the "X fight Y" command
-app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
+app.message(/^pokefight :pokemon-(.*?):$/, async ({ context, say }) => {
     const mon = GameMaster.getPokemonById(context.matches[1]);
 
     if(Battle.getPokemon()[0])
@@ -26,6 +26,29 @@ app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
     else{
         Battle.setNewPokemon(mon, 0, true);
         await say(`:pokemon-${mon.speciesId}: is ready to fight!`);
+    }
+});
+
+app.command("/pokefight", async ({ command, say, ack, client }) => {
+    await ack();
+    var random = Math.floor(Math.random() * 251);
+    const mon = GameMaster.getPokemonByIndex(random);
+    const result = await client.users.info({
+        user: command.user_id,
+     });
+     const selectedUser = result.user.profile.display_name;
+
+    if(Battle.getPokemon()[0])
+    {
+        Battle.setNewPokemon(mon, 1, true);
+        
+        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+       doFight(say);
+    }
+    else{
+        Battle.setNewPokemon(mon, 0, true);
+        await say(`${selectedUser} wants to battle!`);
+        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
     }
 });
 app.message("pokefight go", async ({ message, say, context, client }) => {

@@ -1,8 +1,4 @@
-// These lines make "require" available
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
-import pkg from '@slack/bolt';
+const pkg = require('@slack/bolt');
 const { App } = pkg;
 import { config } from 'dotenv';
 import GameMaster from './pvpoke/js/GameMaster.js';

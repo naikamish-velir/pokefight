@@ -2,11 +2,9 @@
   "name": "pokefight",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "type":"module",
-
+  "main": "server.js",
   "scripts": {
-	"start": "node app.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +12,7 @@
   "dependencies": {
     "@slack/bolt": "^3.12.2",
     "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
     "express": "^4.18.2"
   }
 }

@@ -1,9 +1,12 @@
+// These lines make "require" available
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 import pkg from '@slack/bolt';
 const { App } = pkg;
 import { config } from 'dotenv';
 import GameMaster from './pvpoke/js/GameMaster.js';
 import Battle from './pvpoke/js/battle/Battle.js'
-
 import express from 'express';
 const server = express();
 const port = process.env.PORT || 10000;

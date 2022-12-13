@@ -4,7 +4,13 @@ import { config } from 'dotenv';
 import GameMaster from './pvpoke/js/GameMaster.js';
 import Battle from './pvpoke/js/battle/Battle.js'
 
+import express from 'express';
+const server = express();
+const port = process.env.PORT || 10000;
+
 config();
+
+var id = (Math.random() + 1).toString(36).substring(7);
 
 // Initializes your app with your bot token and signing secret
 const app = new App({
@@ -25,7 +31,7 @@ app.message(/^pokefight :pokemon-(.*?):$/, async ({ context, say }) => {
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`:pokemon-${mon.speciesId}: is ready to fight!`);
+        await say(`Bot ${id} - :pokemon-${mon.speciesId}: is ready to fight!`);
     }
 });
 
@@ -42,13 +48,13 @@ app.command("/pokefight", async ({ command, say, ack, client }) => {
     {
         Battle.setNewPokemon(mon, 1, true);
         
-        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
        doFight(say);
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`${selectedUser} wants to battle!`);
-        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`Bot ${id} - ${selectedUser} wants to battle!`);
+        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
     }
 });
 app.message("pokefight go", async ({ message, say, context, client }) => {
@@ -63,22 +69,22 @@ app.message("pokefight go", async ({ message, say, context, client }) => {
     {
         Battle.setNewPokemon(mon, 1, true);
         
-        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
        doFight(say);
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`${selectedUser} wants to battle!`);
-        await say(`${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`Bot ${id} - ${selectedUser} wants to battle!`);
+        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
     }
 });
 
  async function doFight(say)
 {
-    await say(`:pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${Battle.getPokemon()[1].speciesId}:`);
+    await say(`Bot ${id} - :pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${Battle.getPokemon()[1].speciesId}:`);
     Battle.simulate();
 
-    await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
+    await say(`Bot ${id} - :pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
     await say (`full log can be found at https://pvpoke.com/battle/1500/${Battle.getPokemon()[0].speciesId}/${Battle.getPokemon()[1].speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
     
 
@@ -100,7 +106,7 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
 
 (async () => {
   // Start your app
-  await app.start(process.env.PORT || 3000);
+  await app.start(port);
   
   GameMaster.loadRankingData( "overall", 1500, "all");
 

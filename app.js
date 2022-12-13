@@ -29,7 +29,7 @@ app.message(/^:pokemon-(.*?):$/, async ({ context, say }) => {
     }
 });
 app.message("pokefight go", async ({ message, say, context, client }) => {
-    var random = Math.floor(Math.random() * 151);
+    var random = Math.floor(Math.random() * 251);
     const mon = GameMaster.getPokemonByIndex(random);
     const result = await client.users.info({
         user: message.user,
@@ -50,9 +50,9 @@ app.message("pokefight go", async ({ message, say, context, client }) => {
     }
 });
 
- doFight = async function(say)
+ async function doFight(say)
 {
-    await say(`:pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${mon.speciesId}:`);
+    await say(`:pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${Battle.getPokemon()[1].speciesId}:`);
     Battle.simulate();
 
     await say(`:pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);

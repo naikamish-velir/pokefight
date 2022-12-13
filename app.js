@@ -102,6 +102,12 @@ app.message(/^:pokemon-(.*?): fight :pokemon-(.*?):$/, async ({ context, say }) 
 
   });
 
+//Adding in health check url so deployment doesn't error out.
+server.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+server.listen(port, () => { });
 
 (async () => {
   // Start your app

@@ -30,7 +30,7 @@ app.message(/^pokefight :pokemon-(.*?):$/, async ({ context, say }) => {
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`Bot ${id} - :pokemon-${mon.speciesId}: is ready to fight!`);
+        await say(`>*PokeFight* - :pokemon-${mon.speciesId}: is ready to fight!`);
     }
 });
 
@@ -47,13 +47,13 @@ app.command("/pokefight", async ({ command, say, ack, client }) => {
     {
         Battle.setNewPokemon(mon, 1, true);
         
-        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`>*PokeFight* - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
        doFight(say);
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`Bot ${id} - ${selectedUser} wants to battle!`);
-        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`>*PokeFight* - ${selectedUser} wants to battle!`);
+        await say(`>*PokeFight* - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
     }
 });
 app.message("pokefight go", async ({ message, say, context, client }) => {
@@ -68,23 +68,23 @@ app.message("pokefight go", async ({ message, say, context, client }) => {
     {
         Battle.setNewPokemon(mon, 1, true);
         
-        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`>*PokeFight* - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
        doFight(say);
     }
     else{
         Battle.setNewPokemon(mon, 0, true);
-        await say(`Bot ${id} - ${selectedUser} wants to battle!`);
-        await say(`Bot ${id} - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
+        await say(`>*PokeFight* - ${selectedUser} wants to battle!`);
+        await say(`>*PokeFight* - ${selectedUser} sends out :pokemon-${mon.speciesId}:`);
     }
 });
 
  async function doFight(say)
 {
-    await say(`Bot ${id} - :pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${Battle.getPokemon()[1].speciesId}:`);
+    await say(`>*PokeFight* - :pokemon-${Battle.getPokemon()[0].speciesId}: fights :pokemon-${Battle.getPokemon()[1].speciesId}:`);
     Battle.simulate();
 
-    await say(`Bot ${id} - :pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
-    await say (`full log can be found at https://pvpoke.com/battle/1500/${Battle.getPokemon()[0].speciesId}/${Battle.getPokemon()[1].speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
+    await say(`>*PokeFight* - :pokemon-${Battle.getWinner().pokemon.speciesId}: wins`);
+    await say (`>full log can be found at https://pvpoke.com/battle/1500/${Battle.getPokemon()[0].speciesId}/${Battle.getPokemon()[1].speciesId}/00/${Battle.getPokemon()[0].generateURLMoveStr()}/${Battle.getPokemon()[1].generateURLMoveStr()}`)
     
 
     Battle.clearPokemon();
